@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.Models
 {
     public class MatchupEntryModel
     {
@@ -19,6 +19,6 @@ namespace TrackerLibrary
         /// <summary>
         /// Az a meccs, ahonnan az adott csapat győztesként került ki.
         /// </summary>
-        public MatchupModel ParentMatchup { get; set; }    
+        public MatchupModel ParentMatchup { get; set; }
     }
 }

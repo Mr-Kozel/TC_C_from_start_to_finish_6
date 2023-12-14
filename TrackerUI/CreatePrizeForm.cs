@@ -36,8 +36,14 @@ namespace TrackerUI
                 //{
                 //    db.CreatePrize(model);
                 //}
+
+                //Itt csinálok egy DbCntext példányt, amit kb úgy képzelj el, hogy ez testesíti meg a kommunikációt
+                //az adatbázissal, nem kell neked SQL parancsokat írni, azt ő intézi
+                //Ebben csak configolod az adatbázist
                 using (var context = new OrmDatabaseContext())
                 {
+                    //Csináltam egy OrmDatabaseHandler osztályt, ez pedig az adatbázis műveleteket tartalmazza
+                    //Sor hozzáadása, törlése, összes lekérése stb.
                     var databaseHanlder = new OrmDatabaseHandler(context);
                     databaseHanlder.AddNewPrize(model);
                 }

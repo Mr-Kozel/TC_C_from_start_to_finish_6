@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using TrackerLibrary;
 using TrackerLibrary.DataAccess;
 using TrackerLibrary.Models;
+using TrackerLibrary.OrmDatabase;
 
 namespace TrackerUI
 {
@@ -30,9 +32,14 @@ namespace TrackerUI
                     prizeAmountValue.Text,
                     prizePercentageValue.Text);
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
+                //foreach (IDataConnection db in GlobalConfig.Connections)
+                //{
+                //    db.CreatePrize(model);
+                //}
+                using (var context = new OrmDatabaseContext())
                 {
-                    db.CreatePrize(model);
+                    var databaseHanlder = new OrmDatabaseHandler(context);
+                    databaseHanlder.AddNewPrize(model);
                 }
 
                 placeNameValue.Text = "";

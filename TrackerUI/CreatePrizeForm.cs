@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using TrackerLibrary;
 using TrackerLibrary.DataAccess;
 using TrackerLibrary.Models;
+using TrackerLibrary.OrmDatabase;
 
 namespace TrackerUI
 {
@@ -30,9 +32,20 @@ namespace TrackerUI
                     prizeAmountValue.Text,
                     prizePercentageValue.Text);
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
+                //foreach (IDataConnection db in GlobalConfig.Connections)
+                //{
+                //    db.CreatePrize(model);
+                //}
+
+                //Itt csinálok egy DbCntext példányt, amit kb úgy képzelj el, hogy ez testesíti meg a kommunikációt
+                //az adatbázissal, nem kell neked SQL parancsokat írni, azt ő intézi
+                //Ebben csak configolod az adatbázist
+                using (var context = new OrmDatabaseContext())
                 {
-                    db.CreatePrize(model);
+                    //Csináltam egy OrmDatabaseHandler osztályt, ez pedig az adatbázis műveleteket tartalmazza
+                    //Sor hozzáadása, törlése, összes lekérése stb.
+                    var databaseHanlder = new OrmDatabaseHandler(context);
+                    databaseHanlder.AddNewPrize(model);
                 }
 
                 placeNameValue.Text = "";

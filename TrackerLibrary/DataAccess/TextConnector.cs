@@ -16,7 +16,7 @@ namespace TrackerLibrary.DataAccess
         // TODO - Wire up the CreatePrize for text files.
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            using (IDbConnection connection = new SqlConnection("Server=.\\DESKTOP-EGNA907\\kozak; Database=Tournaments; Trusted_Connection=True;"))
+            using (IDbConnection connection = new SqlConnection("Server=localhost; Database=Tournaments; Trusted_Connection=True; TrustServerCertificate=True;"))
             //SqlConnection(GlobalConfig("Tournaments")))
             {
                 var p = new DynamicParameters();
